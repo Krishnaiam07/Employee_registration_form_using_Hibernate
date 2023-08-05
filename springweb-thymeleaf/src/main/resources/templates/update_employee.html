@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management Details</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="container" style="border:2px solid black">
+<h1><b>EMPLOYEE MANAGEMENT DETAILS</b></h1>
+<hr>
+<form action="#" id="formcheck" th:action="@{/saveEmployee}" th:object="${employee}"
+			method="POST">
+			
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+
+ <label for="firstName"><b>First Name:</b></label> 
+<input type="text" th:field="*{firstName}" id="firstNameInput" name="firstName" >
+<span id="firstNameError" style="color: red; display: none;"><b>Please enter a valid firstName.</b></span>   
+
+
+ <label for="lastName"><b>Last Name:</b></label>  
+<input type="text" th:field="*{lastName}"id="lastNameInput" name="lastName">
+<span id="lastNameError" style="color: red; display: none;"><b>Please enter a valid lastName.</b></span>
+
+			
+ <label for="email"><b>Email           :     </b></label>	
+<input type="text" th:field="*{email}"  id="emailInput" >	
+<span id="emailError" style="color: red; display: none;"><b>Please enter a valid Email.</b></span>  
+		
+		
+	<br></br><div class="form-group">
+			<label>
+		<b>Gender:</b> 
+		   <label/> 
+
+             <input type="radio"  th:field="*{gender}"  id="maleInput" name="gender" value="Male">Male
+             <input type="radio" th:field="*{gender}"   id="femaleInput" name="gender" value="Female">Female
+     </div>
+
+<label for="dob"><b>Date Of Birth:</b></label>
+<input type="date" th:field="*{dob}" id="dobInput" name="dobInput">
+<span id="dobError"  style="color: red; display: none;"><b>Please pick a valid date.</b></span> 
+
+
+
+
+
+<div class="form-group">			
+<label for="english"><b>Language English           :</b></label>								
+ <input type="checkbox"  th:field="*{english}"  id="englishInput"  value="English" >English<br> 
+ </div> 
+        
+         
+    <div class="form-group">				    
+<label for="telugu"><b>Language Telugu           :</b></label>						
+ <input type="checkbox" th:field="*{telugu}"  id="teluguInput" value="Telugu">Telugu<br>
+         </div>		
+         
+         
+         <div class="form-group">				
+<label for="hindi"><b>Language Hindi           :</b></label>								
+<input type="checkbox" th:field="*{hindi}"  id="hindiInput"  value="Hindi">Hindi 
+</div>
+
+
+
+
+
+<label for="age"><b>Age :</b></label>				
+<input type="text" th:field="*{age}" id="ageInput"  size="5" >
+<span id="ageError" style="color: red; display: none;"><b>Please enter a valid Age.</b></span>   
+
+	
+<label for="aadhaar"><b>Aadhaar           :</b></label>								
+<input type="text" th:field="*{aadhaar}" id="aadhaarInput"  >	
+<span id="aadhaarError" style="color: red; display: none;"><b>Please enter a valid Aadhaar.</b></span>  
+
+
+<label for="mobile"><b>Mobile             :</b></label>
+<input type="text" th:field="*{mobile}"   id="mobileInput" >
+<span id="mobileError" style="color: red; display: none;"><b>Please enter a valid Mobile.</b></span> 
+	
+				
+<div>
+<label for="address"><b>Address           :</b></label>								
+<textarea class="form-control" rows="2" style="margin-top: 5px;" id="addressInput" name="address" th:field="*{address}"> </textarea>
+<span id="addressError" style="color: red; display: none;"><b>Please enter a valid Address.<b></span> 
+
+    </div>
+
+<label for="state"><b>Select State             :</b></label>  
+<select   class="form-control"   name="state" id="stateInput" th:field="*{state}" >   
+<option value=""> ----Choose State----
+<option value="Andhrapradesh"> ANDHRAPRADESH 
+<option value="Telangana">TELANGANA   
+<option value="Mumbai">MUMBAI  
+</select>
+
+<br><button type="submit" value="Submit"   class="btn btn-info col-2"   >Update Employee</button> 
+				
+ 
+				
+</form>
+</div>
+</body>
+<script th:inline="javascript">
+
+//This is for FirstName
+document.getElementById("firstNameInput").addEventListener("input", function() {   
+var firstNameInput = document.getElementById("firstNameInput");
+var firstNameError = document.getElementById("firstNameError");  
+
+
+var nameRegex = /^[a-zA-Z\s]+$/;
+
+if (!nameRegex.test(firstNameInput.value)) {
+  firstNameError.style.display = "inline";
+
+} else {
+  firstNameError.style.display = "none";
+} 
+});
+
+//This is for LastName
+document.getElementById("lastNameInput").addEventListener("input", function() { 
+var lastNameInput = document.getElementById("lastNameInput");
+var lastNameError = document.getElementById("lastNameError");
+
+var nameRegex = /^[a-zA-Z\s]+$/;
+
+if (!nameRegex.test(lastNameInput.value)) {
+  lastNameError.style.display = "inline";
+
+} else {
+  lastNameError.style.display = "none";
+
+}
+});
+
+
+//This is for Email
+document.getElementById("emailInput").addEventListener("input", function() { 
+	  var emailInput = document.getElementById("emailInput");
+	  var emailError = document.getElementById("emailError");
+	  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+	  if (!emailRegex.test(emailInput.value)) {
+	    emailError.style.display = "inline"; 
+	    
+
+	  } else {
+	    emailError.style.display = "none";
+	    
+	  }
+	});
+	
+
+//This is for Date Of Birth
+  var dobInput = document.getElementById("dobInput");
+  var dobError = document.getElementById("dobError");
+  
+  var minDate = new Date("1950-01-01").toISOString().split("T")[0];
+  var maxDate = new Date().toISOString().split("T")[0];
+
+  dobInput.setAttribute("min", minDate);
+  dobInput.setAttribute("max", maxDate);
+
+  dobInput.addEventListener("input", function () { 
+  	var selectedDate = dobInput .value;
+    if (selectedDate < minDate || selectedDate > maxDate) {
+      dobError .style.display = "inline"; 
+      
+    } else {
+      dobError .style.display = "none";
+     
+    }
+ 
+ 
+  });  
+  
+ 
+//This is for Age
+document.getElementById("ageInput").addEventListener("input", function() {
+	  var ageInput = document.getElementById("ageInput");
+	  var ageError = document.getElementById("ageError");
+	  var ageRegex = /^(?!0|1)\d{2}$/;
+	  if (!ageRegex.test(ageInput.value)) {
+		  ageError.style.display = "inline";
+	  } else {
+		  ageError.style.display = "none";
+	  }
+	});
+	
+//This for Aadhaar
+document.getElementById("aadhaarInput").addEventListener("input", function() { 
+var aadhaarInput = document.getElementById("aadhaarInput");
+var aadhaarError = document.getElementById("aadhaarError");
+var aadhaarRegex = /^(?!0|1)\d{12}$/;
+
+	 if (!aadhaarRegex.test(aadhaarInput.value)) {
+  aadhaarError.style.display = "inline";
+  
+} else { 
+  aadhaarError.style.display = "none";
+} 
+});
+
+//This is for Mobile
+document.getElementById("mobileInput").addEventListener("input", function() {
+var mobileInput = document.getElementById("mobileInput");
+var mobileError = document.getElementById("mobileError");
+var mobileRegex = /^[6-9]\d{9}$/;
+
+	 if (!mobileRegex.test(mobileInput.value)) {
+		 mobileError.style.display = "inline";
+
+} else {
+	  mobileError.style.display = "none";
+
+} 
+});
+	
+//This is for Address
+document.getElementById("addressInput").addEventListener("input", function() {
+var addressInput = document.getElementById("addressInput");
+var addressError = document.getElementById("addressError");
+var addressRegex = /^[a-zA-Z0-9\s#.,-]*$/;
+
+	 if (!addressRegex.test(addressInput.value)) {
+		 addressError.style.display = "inline";
+		 
+		 
+} 
+	 
+	 else {
+	  addressError.style.display = "none";
+	  
+	  
+	  
+} 
+});
+	
+	
+
+	$('#formcheck').submit(function() {
+		
+		//JavaScript Client Side Validation
+		var firstName = $("#firstNameInput").val();
+		var lastName = $("#lastNameInput").val();
+		var email = $("#emailInput").val();
+		var gender = $("#maleInput").val(); 
+		var gender = $("#femaleInput").val();
+		var dob = $("#dobInput").val();
+		var age = $("#ageInput").val();
+		var aadhaar = $("#aadhaarInput").val();
+		var mobile = $("#mobileInput").val();
+		var address = $("#addressInput").val();
+		var state=$("#stateInput").val();
+		
+		if(firstName == "")
+		{
+			$("#firstNameInput").focus();
+			alert("Enter First Name");
+			return false;		
+		}
+		
+		
+		 var nameRegex = /^[a-zA-Z\s]+$/;
+
+		  if (!nameRegex.test(firstName)) {
+			  alert("Invalid firstName.");
+			  $("#firstNameInput").focus();
+			  return false;
+		  }
+		 
+		
+		if(lastName == "")
+		{
+			$("#lastNameInput").focus();
+			alert("Enter Last Name");
+			return false;		
+		}
+		 var nameRegex = /^[a-zA-Z\s]+$/;
+
+		  if (!nameRegex.test(lastName)) {
+			  alert("Invalid lastName.");
+			  $("#lastNameInput").focus();
+			  return false;
+		  }
+		
+		if(email == "")
+		{
+			$("#emailInput").focus();
+			alert("Enter Email");
+			return false;		
+		}
+		var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+		  if (!emailRegex.test(emailInput.value)) {
+			  alert("Invalid Email.");
+			  $("#emailInput").focus();
+			  return false;
+		  }
+		if ($('input[name="gender"]:checked').length == 0) {
+			$("#maleInput").focus();
+			$("#femaleInput").focus();
+			alert("Select Gender");
+			return false; 
+			
+		}
+		
+	if(dob=="")  
+	{
+		$("#dobInput").focus();
+		alert("Pick DOB");
+		return false;
+	}
+	var selectedDate = dobInput .value;
+  if (selectedDate < minDate || selectedDate > maxDate) {
+		alert("Invalid dob.");
+	    $("#dobInput").focus();
+	    return false;
+	}
+	 
+		if(age == "")
+		{
+			$("#ageInput").focus();
+			alert("Enter Age");
+			return false;
+		}
+			
+		 var ageRegex = /^(?!0|1)\d{2}$/;
+		  if (!ageRegex.test(ageInput.value)) {
+			  alert("Invalid Age.");
+			  $("#ageInput").focus();
+			  return false;
+		  }
+		  
+		if(aadhaar == "")
+		{
+			$("#aadhaarInput").focus();
+			alert("Enter Aadhaar");
+			return false;		
+		} var aadhaarRegex = /^(?!0|1)\d{12}$/;
+
+		 if (!aadhaarRegex.test(aadhaarInput.value)) {
+			 alert("Invalid Aadhaar.");
+			  $("#aadhaarInput").focus();
+			  return false;
+		  
+		 }
+		if(mobile == "")
+		{
+			$("#mobileInput").focus();
+			alert("Enter Mobile");
+			return false;		
+		} var mobileRegex = /^[6-9]\d{9}$/;
+
+		 if (!mobileRegex.test(mobileInput.value)) {
+			 alert("Invalid Mobile.");
+			  $("#mobileInput").focus();
+			  return false;
+		  
+		 }
+		 
+		
+		if(address == "")
+		{
+			$("#addressInput").focus();
+			alert("Enter Address");
+			return false;		
+		}
+		var addressRegex = /^[a-zA-Z0-9\s#.,-]*$/;
+
+		 if (!addressRegex.test(addressInput.value)) {
+			 alert("Invalid Address.");
+			  $("#addressInput").focus();
+			  return false;
+		  
+		 
+		 }
+			 
+		if(state=="")
+	    {   
+			$("#stateInput").focus();
+			alert("Select State");
+		    return false;	
+	    }
+	});
+	</script>
+
+
+
+
+
+	</html>
